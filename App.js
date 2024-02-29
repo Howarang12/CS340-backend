@@ -1,14 +1,15 @@
+require('dotenv').config();
 const express = require('express')
+const cors = require('cors');
 const app = express()
 const PORT = 3001
-const cors = require('cors')
 
 const UsersRoutes = require('./routes/UsersRoutes')
 const PostsRoutes = require('./routes/PostsRoutes')
 const GroupsRoutes = require('./routes/GroupsRoutes')
 const UserGroupsRoutes = require('./routes/UserGroupsRoutes')
 
-app.use(cors())
+app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 

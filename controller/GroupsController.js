@@ -82,16 +82,16 @@ exports.updateGroupByID = async(req, res) => {
 
 		const {id} = req.params
 
-		if (!req.body.groupnameInput ){
+		if (!req.body.groupNameInput ){
 			return res.status(400).send({
         message: 'All fields required',
       })
 		}
 
-		const { groupnameInput } = req.body
+		const { groupNameInput } = req.body
 		
 		const query1 = `
-			SELECT groupID, groupname
+			SELECT groupID, groupName
 				FROM Groups 
 				WHERE groupID = ?
 			`
@@ -101,10 +101,10 @@ exports.updateGroupByID = async(req, res) => {
 		if(group){
 			const query2 = `
 			UPDATE Groups
-				SET groupname = ? 
+				SET groupName = ? 
 				WHERE groupID = ?
 			`
-			await db.pool.query(query2, [groupnameInput, id])
+			await db.pool.query(query2, [groupNameInput, id])
 		}
 		
 		return res.status(200).json({message: 'Group successfully updated'})
