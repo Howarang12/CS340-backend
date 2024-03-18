@@ -19,7 +19,7 @@ exports.addComment = async (req, res) => {
 			INSERT INTO Comments(commentText, Posts_postID, Users_userID)
 				VALUES(?, ?, ?)
 			`
-		const [result] = await db.pool.query(query, [commentText, userID, postID])
+		const [result] = await db.pool.query(query, [commentText, postID, userID])
 
 		return res.status(200).json(result)
 	} catch (error) {
@@ -98,6 +98,6 @@ exports.editCommentByID = async (req, res) => {
 		
 		return res.status(200).json({message: 'Comment successfully updated'})
 	} catch (error) {
-		res.status(500).send({message: error.message})
+		return res.status(500).send({message: error.message})
 	}
 }

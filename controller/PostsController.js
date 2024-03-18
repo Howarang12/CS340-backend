@@ -86,11 +86,13 @@ exports.updatePostByID = async (req, res) => {
 				SET description = ?, createdAt = NOW()
 				WHERE postID = ?
 			`
-
 			await db.pool.query(query2, [description, id])
+			return res.status(200).json({message: 'Post successfully updated'})
+		} else {
+			return res.status(200).json({message: 'Post does not exist'})
 		}
 		
-		return res.status(200).json({message: 'Post successfully updated'})
+		
 	} catch (error) {
 		res.status(500).send({message: error.message})
 	}
